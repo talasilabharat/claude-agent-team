@@ -12,6 +12,9 @@ A small startup hook (`hooks/hooks.json` -> `context/working-style.md`) adds Bha
 ## Git sync check
 A second startup hook runs `git fetch` and `git status -sb` in the folder where a session starts. If the folder is a Git repository, Claude is told whether it is behind or ahead of GitHub and follows the Git sync rules in `context/working-style.md` (pull with fast-forward only; ask before any push). Outside a Git folder it prints nothing.
 
+## Save skill
+Say **Save** (or `/delivery-team:save`) and Claude checks whether it is a good moment, writes confirmed progress into the project's state file (MIS_HANDOFF.md or .claude/project-state.md), offers a GitHub push, and clears the chat when worthwhile (the app asks for approval). It cannot run `/compact`; Claude Code compacts automatically at the size set by `autoCompactWindow` in settings.
+
 ## Agent names
 Because this is a plugin, every agent appears with the label `delivery-team:` (for example `delivery-team:architect`) and the master skill as `delivery-team:orchestrate`. The master (`/orchestrate`) already uses these names.
 

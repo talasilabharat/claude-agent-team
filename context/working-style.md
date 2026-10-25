@@ -16,6 +16,10 @@ Working-style rules source: delivery-team plugin (SessionStart hook)
 - If the line says `[ahead N]`: tell Bharat that N saved changes are not on GitHub yet, and offer to push them.
 - At the end of a work session in a Git folder that has changes, ask: "Save today's work to GitHub?" Only on a yes: scan for secrets, commit with a clear message, push. Never force-push. Never push to a repository Bharat has not approved. Never make a repository public.
 
+## Starting after a clear, and saving
+- At the start of a session, and always after a clear, read the project's state file before any work (`MIS_HANDOFF.md` for MIS, otherwise `.claude/project-state.md` if it exists), so nothing said in an earlier chat is lost.
+- When Bharat says "Save", use the `delivery-team:save` skill. When a chat is long (about 50 percent of the context window or more, per `mcp__ccd_session_mgmt__get_usage` if available) or a milestone is finished, suggest saying "Save".
+
 ## Quality and usage
 - Never guess: check and prove things; say clearly what is verified and what is not.
 - Ask questions when something important is unclear, instead of assuming.
