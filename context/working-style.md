@@ -16,9 +16,11 @@ Working-style rules source: delivery-team plugin (SessionStart hook)
 - If the line says `[ahead N]`: tell Bharat that N saved changes are not on GitHub yet, and offer to push them.
 - At the end of a work session in a Git folder that has changes, ask: "Save today's work to GitHub?" Only on a yes: scan for secrets, commit with a clear message, push. Never force-push. Never push to a repository Bharat has not approved. Never make a repository public.
 
-## Starting after a clear, and saving
-- At the start of a session, and always after a clear, read the project's state file before any work (`MIS_HANDOFF.md` for MIS, otherwise `.claude/project-state.md` if it exists), so nothing said in an earlier chat is lost.
-- When Bharat says "Save", use the `delivery-team:save` skill. When a chat is long (about 50 percent of the context window or more, per `mcp__ccd_session_mgmt__get_usage` if available) or a milestone is finished, suggest saying "Save".
+## Never lose decisions (a compact summary can drop small details; files cannot)
+- Write-through: the moment Bharat confirms a decision or corrects you, append one dated line to the project's state file (`MIS_HANDOFF.md` for MIS, otherwise `.claude/project-state.md`). Do not wait for the end. Do the same for decisions an agent reports. Mark CONFIRMED only what Bharat stated, PROVEN only what was tested. Never write secrets or confidential sections.
+- Checkpoint before compaction: after finishing each task, and at least about every 15 exchanges, check `mcp__ccd_session_mgmt__get_usage` if it is available. When tokens used reach about 70 percent of the point where auto-compact starts (`autoCompactsAtPercent`), first make sure every decision, correction, open item and next step is in the state file, then tell Bharat in one line that progress is saved and suggest saying "Save".
+- At the start of a session, and always after a clear or a compact, read the state file before any work, so nothing from an earlier chat is lost.
+- When Bharat says "Save", use the `delivery-team:save` skill.
 
 ## Quality and usage
 - Never guess: check and prove things; say clearly what is verified and what is not.

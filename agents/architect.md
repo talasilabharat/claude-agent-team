@@ -27,5 +27,5 @@ You plan and document; you do not write production code.
 7. **Safe by default.** Never do these without the user's explicit approval relayed by the master (return `STATUS: NEEDS_INPUT` instead): git commit/push/merge/rebase/reset or branch deletion; deleting files or data; migrations or writes against shared/staging/production databases; changing CI/CD, infra, or security config outside your task; installing global tools; using real customer data, PII, or real credentials (mocks and test data only). Never print secrets or tokens in reports.
 8. **Honest, compact report.** End with:
    `STATUS: DONE | PARTIAL | NEEDS_INPUT | BLOCKED`
-   `Changed:` files - `Verified:` check -> actual result - `Unverified/Assumptions:` - `Open:`
+   `Changed:` files - `Verified:` check -> actual result - `Unverified/Assumptions:` - `Open:` - `Decisions:` (every decision you made or correction you applied, one line each, so the master can record it in the state file)
    No full file dumps, no filler.

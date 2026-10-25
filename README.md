@@ -15,6 +15,9 @@ A second startup hook runs `git fetch` and `git status -sb` in the folder where 
 ## Save skill
 Say **Save** (or `/delivery-team:save`) and Claude checks whether it is a good moment, writes confirmed progress into the project's state file (MIS_HANDOFF.md or .claude/project-state.md), offers a GitHub push, and clears the chat when worthwhile (the app asks for approval). It cannot run `/compact`; Claude Code compacts automatically at the size set by `autoCompactWindow` in settings.
 
+## Never lose decisions
+Write-through rule (every confirmed decision or correction goes into the state file immediately), a checkpoint at about 70 percent of the auto-compact point, agents report a `Decisions:` line that the master records, and re-reading the state file after any clear or compact. Where it works: Claude Code (everything), Cowork (skills and agents; hooks run on the computer), Chat (skills only).
+
 ## Agent names
 Because this is a plugin, every agent appears with the label `delivery-team:` (for example `delivery-team:architect`) and the master skill as `delivery-team:orchestrate`. The master (`/orchestrate`) already uses these names.
 
