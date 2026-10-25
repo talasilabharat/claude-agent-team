@@ -41,6 +41,7 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 1. **Discuss** the change with Bharat until there is a conclusion. No edits yet.
 2. **Confirm the plan**: show what will change, where, and the exact wording of any rule text; build only after an explicit yes.
 3. **Build**: make only the confirmed changes and bump `version` (1.3.x). Never change existing agent rules, personas or working style unless that exact change was confirmed.
+   - Also update the version number and date in `skills/version/SKILL.md` (the `/version` command), so it matches `plugin.json`.
 4. **Show the exact differences** (`git diff`) to Bharat.
 5. **Test**: one token check (agent start cost) plus one small real task with an agent.
 6. **Second yes** from Bharat before pushing.
