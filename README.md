@@ -9,6 +9,9 @@ Bharat's Claude Code delivery agent team, packaged as a plugin so the same agent
 ## Always-on working style
 A small startup hook (`hooks/hooks.json` -> `context/working-style.md`) adds Bharat's working-style rules (explain like to a beginner, never guess, ask before assuming) to every session on every laptop where this plugin is installed. To change those rules, edit `context/working-style.md`.
 
+## Git sync check
+A second startup hook runs `git fetch` and `git status -sb` in the folder where a session starts. If the folder is a Git repository, Claude is told whether it is behind or ahead of GitHub and follows the Git sync rules in `context/working-style.md` (pull with fast-forward only; ask before any push). Outside a Git folder it prints nothing.
+
 ## Agent names
 Because this is a plugin, every agent appears with the label `delivery-team:` (for example `delivery-team:architect`) and the master skill as `delivery-team:orchestrate`. The master (`/orchestrate`) already uses these names.
 
