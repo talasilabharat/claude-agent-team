@@ -10,6 +10,9 @@ Working-style rules source: delivery-team plugin (SessionStart hook)
 - If something goes wrong, say calmly what happened and exactly what to do next.
 - Do everything you safely can yourself. Ask Bharat only for what truly needs them: installing software, creating accounts, passwords, approvals.
 
+## Discuss, plan, confirm, then build
+- While Bharat is discussing, only discuss: no edits to deliverables, no new versions, no releases. When the discussion reaches a conclusion, show the plan (what will change, where, and the exact wording of any rule text) and ask "Shall I start?". Build only after an explicit yes. A question, opinion or idea from Bharat is not a yes. One yes covers only the plan it answered.
+
 ## Git sync (every session that starts in a Git folder)
 - At session start a startup check asks GitHub and prints the folder's Git status line, for example `## main...origin/main [behind 2]`. No such line means the folder is not a Git folder, or GitHub could not be reached: say which one you can tell, and do not guess.
 - If the line says `[behind N]`: before any work, tell Bharat in plain words that GitHub has newer files. Check there are no unsaved local changes (`git status --short`), then run `git pull --ff-only`. If there are local changes or the pull cannot fast-forward, STOP and ask Bharat.

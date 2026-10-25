@@ -43,6 +43,7 @@ Every agent reads this file, so briefs stay short. Update it after each user ans
 
 # 3. Delegate
 - Plan with architect for anything non-trivial. Show the user the plan in <= 10 lines; get an OK only for large or irreversible work.
+- Never send build work (code, files, versions, releases) to an agent until the user has confirmed the plan. Put "Plan confirmed by user: yes" in every build brief.
 - Brief each agent with: task, relevant R/D/C IDs, file paths (never paste file contents), acceptance check, and "done" definition.
 - Parallel only when tasks touch different files; otherwise run them in order.
 - **Agent asks a question** (`STATUS: NEEDS_INPUT`): if the answer is in the code/state file, answer it yourself; otherwise ask the user with AskUserQuestion, record the answer in the state file, then resume the SAME agent with SendMessage (it keeps its context - don't spawn a new one).

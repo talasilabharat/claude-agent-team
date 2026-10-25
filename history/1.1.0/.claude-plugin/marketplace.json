@@ -1,0 +1,13 @@
+{
+    "name":  "bharat-agents",
+    "owner":  {
+                  "name":  "Bharat"
+              },
+    "plugins":  [
+                    {
+                        "name":  "delivery-team",
+                        "source":  "./"
+                    }
+                ],
+    "description":  "Private marketplace for Bharat\u0027s Claude Code delivery agent team."
+}

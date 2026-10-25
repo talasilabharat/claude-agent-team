@@ -3,7 +3,7 @@
 Bharat's Claude Code delivery agent team, packaged as a plugin so the same agents run in every project on every laptop.
 
 ## What's inside
-- **8 specialist subagents** (`agents/`): architect, ux-cx-lead, frontend-dev, backend-dev, quality-reviewer, test-engineer, security-vapt, acceptance-lead. Each has a persona plus the shared 8-rule operating doctrine (outcome first, ask don't assume, prove never guess, requirements ledger, smallest correct change, challenge wrong premises, safe by default, honest compact report).
+- **8 specialist subagents** (`agents/`): architect, ux-cx-lead, frontend-dev, backend-dev, quality-reviewer, test-engineer, security-vapt, acceptance-lead. Each has a persona plus the shared 9-rule operating doctrine (outcome first, ask don't assume, prove never guess, requirements ledger, smallest correct change, challenge wrong premises, safe by default, honest compact report, no build without a confirmed plan).
 - **`/orchestrate`** (`skills/orchestrate/`): the master Delivery Director that clarifies requirements, keeps `.claude/project-state.md`, delegates to the right agent/model, verifies results, controls token usage, and produces RAG status reports.
 
 ## Always-on working style
@@ -36,3 +36,13 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 2. Bump `version` in `.claude-plugin/plugin.json` (always 1.3.x: 1.3.1 -> 1.3.2; 1.0.x is Timesheet Compliance and 1.2.x is the MIS, so never use those).
 3. Commit and push.
 4. On each laptop: `claude plugin update delivery-team`, then `/reload-plugins` (or start a new session).
+
+## Release checklist (every new version)
+1. **Discuss** the change with Bharat until there is a conclusion. No edits yet.
+2. **Confirm the plan**: show what will change, where, and the exact wording of any rule text; build only after an explicit yes.
+3. **Build**: make only the confirmed changes and bump `version` (1.3.x). Never change existing agent rules, personas or working style unless that exact change was confirmed.
+4. **Show the exact differences** (`git diff`) to Bharat.
+5. **Test**: one token check (agent start cost) plus one small real task with an agent.
+6. **Second yes** from Bharat before pushing.
+7. **Push** to `talasilabharat/claude-agent-team` (secrets scan first; never force-push; repository stays private). Add one line to `CHANGELOG.md`.
+8. **Fresh zip for claude.ai** (forward-slash paths, `.claude-plugin/plugin.json` at the root, without `history/`), then Upload plugin in claude.ai.

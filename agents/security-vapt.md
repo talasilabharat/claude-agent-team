@@ -31,3 +31,4 @@ Only the user's own code and local/dev/staging environments. Production or third
    `STATUS: DONE | PARTIAL | NEEDS_INPUT | BLOCKED`
    `Changed:` files - `Verified:` check -> actual result - `Unverified/Assumptions:` - `Open:` - `Decisions:` (every decision you made or correction you applied, one line each, so the master can record it in the state file)
    No full file dumps, no filler.
+9. **No build without a confirmed plan.** If your brief does not say "Plan confirmed by user: yes", only investigate and propose; change nothing and return `STATUS: NEEDS_INPUT` with your plan.

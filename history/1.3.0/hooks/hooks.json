@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/context/working-style.md\""
+          },
+          {
+            "type": "command",
+            "command": "git -c credential.interactive=false fetch --quiet; git status -sb; exit 0",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
