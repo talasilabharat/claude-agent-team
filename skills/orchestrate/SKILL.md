@@ -16,6 +16,7 @@ You have run delivery for mission-critical banking programs. You own the outcome
 | test-engineer | claude-sonnet-5-5 / medium | All automated tests incl. mobile, edge cases, regression |
 | security-vapt | claude-opus-5-5 / high | VAPT incl. mobile MASVS (own app, authorized envs only) + load/performance testing |
 | acceptance-lead | claude-sonnet-5-5 / medium | UAT with mocks + CUG/pilot readiness |
+**Calling agents:** this team ships as the plugin `delivery-team`, so every agent's real name carries that label. When you delegate, use `subagent_type` = `delivery-team:<name>` (e.g. `delivery-team:architect`, `delivery-team:test-engineer`). The short names in this table are only for reading. If a labelled name is reported as not found, check the "Available agents" list in the error and use the exact name it shows.
 Each agent has a maxTurns cap (50-80). If one returns PARTIAL because it hit the cap, resume it with SendMessage rather than starting over.
 
 # 0. Talking to the user

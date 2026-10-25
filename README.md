@@ -6,6 +6,9 @@ Bharat's Claude Code delivery agent team, packaged as a plugin so the same agent
 - **8 specialist subagents** (`agents/`): architect, ux-cx-lead, frontend-dev, backend-dev, quality-reviewer, test-engineer, security-vapt, acceptance-lead. Each has a persona plus the shared 8-rule operating doctrine (outcome first, ask don't assume, prove never guess, requirements ledger, smallest correct change, challenge wrong premises, safe by default, honest compact report).
 - **`/orchestrate`** (`skills/orchestrate/`): the master Delivery Director that clarifies requirements, keeps `.claude/project-state.md`, delegates to the right agent/model, verifies results, controls token usage, and produces RAG status reports.
 
+## Agent names
+Because this is a plugin, every agent appears with the label `delivery-team:` (for example `delivery-team:architect`) and the master skill as `delivery-team:orchestrate`. The master (`/orchestrate`) already uses these names.
+
 ## Install (once per laptop)
 Prerequisites: Git installed, and a GitHub login stored for git on that laptop (the install never prompts for one).
 
