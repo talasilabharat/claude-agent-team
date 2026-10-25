@@ -33,6 +33,6 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 
 ## Changing an agent or rule
 1. Edit the file in `agents/` or `skills/orchestrate/` in this repository.
-2. Bump `version` in `.claude-plugin/plugin.json` (e.g. 1.0.0 -> 1.1.0).
+2. Bump `version` in `.claude-plugin/plugin.json` (always 1.3.x: 1.3.1 -> 1.3.2; 1.0.x is Timesheet Compliance and 1.2.x is the MIS, so never use those).
 3. Commit and push.
 4. On each laptop: `claude plugin update delivery-team`, then `/reload-plugins` (or start a new session).
