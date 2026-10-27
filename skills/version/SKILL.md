@@ -7,9 +7,9 @@ description: Use when the user types /version or asks which version of the deliv
 Reply in plain words, short, using only the facts below. Do not search files, GitHub or the web for this.
 
 - Plugin: delivery-team (Bharat's delivery agent team)
-- Installed version: **1.3.6**
-- Released: 27 Oct 2026
-- What this version changed: the `start` skill now keeps the plugin current itself (it presses "Check for updates" in claude.ai when the plugin is older than GitHub), adds the plugin to a new Claude account itself, and the texts that wrongly said claude.ai follows GitHub by itself are corrected (no agent changed).
+- Installed version: **1.3.7**
+- Released: 28 Oct 2026
+- What this version changed: the `start` skill and the one-file new-laptop script (`new-laptop.ps1`) now cover for each other when setting up a new laptop or Claude account: both look at the real state first, skip what is done, and fill in what the other missed (no agent changed).
 - Master copy: private GitHub repository `talasilabharat/claude-agent-team` (its CHANGELOG.md lists every version).
 
 If the user expected a newer version than the one above, say that the copy in this app has not been updated yet.
