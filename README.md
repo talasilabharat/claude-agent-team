@@ -10,10 +10,10 @@ Bharat's Claude Code delivery agent team, packaged as a plugin so the same agent
 A small startup hook (`hooks/hooks.json` -> `context/working-style.md`) adds Bharat's working-style rules (explain like to a beginner, never guess, ask before assuming) to every session on every laptop where this plugin is installed. To change those rules, edit `context/working-style.md`.
 
 ## Git sync check
-A second startup hook runs `git fetch` and `git status -sb` in the folder where a session starts. If the folder is a Git repository, Claude is told whether it is behind or ahead of GitHub and follows the Git sync rules in `context/working-style.md` (pull with fast-forward only; ask before any push). Outside a Git folder it prints nothing.
+A second startup hook runs `git fetch` and `git status -sb` in the folder where a session starts. If the folder is a Git repository, Claude is told whether it is behind or ahead of GitHub and follows the Git sync rules in `context/working-style.md` (pull with fast-forward only; saving to GitHub is automatic where the project has the sync hooks, so it does not ask). Outside a Git folder it prints nothing.
 
 ## Save skill
-Say **Save** (or `/delivery-team:save`) and Claude checks whether it is a good moment, writes confirmed progress into the project's state file (MIS_HANDOFF.md or .claude/project-state.md), offers a GitHub push, and clears the chat when worthwhile (the app asks for approval). It cannot run `/compact`; Claude Code compacts automatically at the size set by `autoCompactWindow` in settings.
+Say **Save** (or `/delivery-team:save`) and Claude checks whether it is a good moment, writes confirmed progress into the project's state file (MIS_HANDOFF.md or .claude/project-state.md), and clears the chat when worthwhile (GitHub saving is automatic where the project has the sync hooks) (the app asks for approval). It cannot run `/compact`; Claude Code compacts automatically at the size set by `autoCompactWindow` in settings.
 
 ## Never lose decisions
 Write-through rule (every confirmed decision or correction goes into the state file immediately), a checkpoint at about 70 percent of the auto-compact point, agents report a `Decisions:` line that the master records, and re-reading the state file after any clear or compact. Where it works: Claude Code (everything), Cowork (skills and agents; hooks run on the computer), Chat (skills only).

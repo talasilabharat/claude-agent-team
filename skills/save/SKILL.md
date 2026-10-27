@@ -1,6 +1,6 @@
 ---
 name: save
-description: Use when the user says "Save", "/save", "save progress" or "wrap up". Checks whether this is a good moment, saves confirmed progress into the project's state file (and offers to push to GitHub), then clears the chat to save tokens when that is worthwhile.
+description: Use when the user says "Save", "/save", "save progress" or "wrap up". Checks whether this is a good moment, saves confirmed progress into the project's state file (GitHub saving is automatic in projects with the sync hooks), then clears the chat to save tokens when that is worthwhile.
 ---
 # Save: wrap up safely, then clear
 
@@ -21,7 +21,7 @@ You run this in the main chat because only the main chat has the conversation hi
 - Where there is no folder to write to (Claude Chat): write the same handoff text as a downloadable file or document and tell Bharat to add it to the Project's knowledge himself, because you cannot do that for him. In Cowork, write it into the attached folder; if no folder is attached, say so and treat it like Chat.
 
 ## 3. GitHub (only if the folder is a Git repository with changes)
-- Run `git status --short`. If there are changes, ask: "Save today's work to GitHub?" Only on a yes: scan for secrets, commit with a clear message, push to the approved remote. Never force-push, never make a repository public.
+- Run `git status --short`. If the project has the automatic sync (its CLAUDE.md says so), do not ask: tell Bharat the changes are saved to GitHub by the sync. If there are changes and no automatic sync, ask: "Save today's work to GitHub?" Only on a yes: scan for secrets, commit with a clear message, push to the approved remote. Never force-push, never make a repository public.
 
 ## 4. Clear the chat (only if step 1 said it is a good moment)
 - Say in one line what will happen: the chat will be cleared after Bharat approves; everything important is in the state file; the old chat can be restored with "Resume previous session"; the next message can simply be "continue".

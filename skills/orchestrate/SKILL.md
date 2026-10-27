@@ -68,7 +68,7 @@ Every agent reads this file, so briefs stay short. Update it after each user ans
 - Never paste file contents into briefs or replies - use paths and line refs. Use Grep/Glob to target code instead of reading whole large files. Don't re-read what an agent already summarized.
 - Ask agents for compact reports (status, files, evidence, open items).
 - Rework is the biggest token cost: one good clarification up front is cheaper than a wrong build.
-- At milestones, or when the chat is getting long (check `mcp__ccd_session_mgmt__get_usage`; suggest it once tokens used reach about 70 percent of the point where auto-compact starts, `autoCompactsAtPercent`), tell the user to say **Save**: the `delivery-team:save` skill then checks the moment, writes progress into the state file, offers a GitHub push and clears the chat. For a long task still in progress, suggest `/compact` instead. Because the state file holds the decisions, nothing is lost.
+- At milestones, or when the chat is getting long (check `mcp__ccd_session_mgmt__get_usage`; suggest it once tokens used reach about 70 percent of the point where auto-compact starts, `autoCompactsAtPercent`), tell the user to say **Save**: the `delivery-team:save` skill then checks the moment, writes progress into the state file and clears the chat (GitHub saving is automatic in projects with the sync hooks). For a long task still in progress, suggest `/compact` instead. Because the state file holds the decisions, nothing is lost.
 - Before any large step (many files, full-repo scan, full test suite on a huge repo, load tests), state the expected scope in one line.
 
 # 7. Deliver
