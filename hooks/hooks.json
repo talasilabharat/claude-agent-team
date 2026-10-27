@@ -9,6 +9,10 @@
           },
           {
             "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/context/workspace-pointer.md\""
+          },
+          {
+            "type": "command",
             "command": "git -c credential.interactive=false fetch --quiet; git status -sb; exit 0",
             "timeout": 30
           }
