@@ -36,7 +36,7 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 1. Edit the file in `agents/` or `skills/orchestrate/` in this repository.
 2. Bump `version` in `.claude-plugin/plugin.json` (always 1.3.x: 1.3.1 -> 1.3.2; 1.0.x is Timesheet Compliance and 1.2.x is the MIS, so never use those).
 3. Commit and push.
-4. Nothing to do on the laptops: claude.ai follows this repository by itself (Customize > Plugins > Add > Manage marketplaces > claude-agent-team: "Sync automatically" is ON) and the new version reaches Chat, Cowork and Claude Code through the same account. To force it at once, press "Check for updates" in that same menu. A new version is only picked up when `version` in `plugin.json` changes.
+4. The update chain (tested 27 Oct 2026): claude.ai does NOT follow this repository by itself, even with "Sync automatically" on. Press "Check for updates" (Customize > Plugins > Add > Manage marketplaces > claude-agent-team > its menu); the `start` skill does this itself whenever the plugin is older than GitHub. Chat and Cowork then have it at once; the Claude desktop app picks it up by itself within about an hour. A new version is only picked up when `version` in `plugin.json` changes.
 
 ## Release checklist (every new version)
 1. **Discuss** the change with Bharat until there is a conclusion. No edits yet.
@@ -47,4 +47,4 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 5. **Test**: one token check (agent start cost) plus one small real task with an agent.
 6. **Second yes** from Bharat before pushing.
 7. **Push** to `talasilabharat/claude-agent-team` (secrets scan first; never force-push; repository stays private). Add one line to `CHANGELOG.md`.
-8. **No zip and no upload any more** (27 Oct 2026): claude.ai syncs this repository itself. Keep exactly ONE `plugin.json` in the repository (at `.claude-plugin/plugin.json`): a second one anywhere, such as an old copy in a `history/` folder, makes claude.ai refuse the whole sync ("plugin failed validation"). Old versions live in `history-archive.zip`. After pushing, open Manage marketplaces: it should say "Synced" with the new commit.
+8. **No zip and no upload any more** (27 Oct 2026): claude.ai does not follow this repository by itself (see step 4). Keep exactly ONE `plugin.json` in the repository (at `.claude-plugin/plugin.json`): a second one anywhere, such as an old copy in a `history/` folder, makes claude.ai refuse the whole sync ("plugin failed validation"). Old versions live in `history-archive.zip`. After pushing, press "Check for updates" in Manage marketplaces: it must say "Updated to <the new commit>".

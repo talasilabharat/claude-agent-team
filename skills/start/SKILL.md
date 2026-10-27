@@ -25,9 +25,10 @@ description: The ONE skill for Bharat's whole workspace. Use when Bharat's messa
 
 ## Step 1: greet, check, fix (FULL mode)
 - One warm line ("Hi Bharat, ready when you are.").
+- Check, do not assume, that the delivery-team plugin is in THIS Claude account and is the newest version (`reference/bootstrap.md` Account step, `reference/plugin-update.md`). A new laptop, a new account, or both: `reference/bootstrap.md` does everything after one yes.
 - No `workspace-control` folder: say "This looks like a new laptop or account. I will set everything up for you; it takes a few minutes. Shall I start?" On yes follow `reference/bootstrap.md`, then come back here.
 - Otherwise run `powershell -NoProfile -File <workspace>\scripts\start-check.ps1` (read-only; `<workspace>` is `D:\Projects` on L1).
-- For every WARN or FAIL do the automatic fix from `reference/fix-issues.md` yourself, then run the check again. Ask only for what the table says only he can give.
+- For every WARN or FAIL do the automatic fix from `reference/fix-issues.md` yourself, then run the check again. Ask only for what the table says only he can give. If the plugin is older than GitHub, do `reference/plugin-update.md` yourself.
 - Tell him the result in at most 6 plain lines: what is fine, what you fixed (and the proof), what still needs him.
 
 ## Step 2: the menu
