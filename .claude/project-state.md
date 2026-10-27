@@ -1,6 +1,7 @@
 # Project state - Claude agent team (delivery-team plugin)
 
 Legend: CONFIRMED = Bharat stated it. PROVEN = tested with real output. UNVERIFIED / OPEN = not done or not checked.
+Laptops are called L1 (the i-exceed work laptop), L2 (the second laptop), L3 and so on. Never write a real computer name.
 
 ## 00. LIVE STATE - READ THIS FIRST (rewritten whenever anything changes)
 

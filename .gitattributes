@@ -1,2 +1,5 @@
 .claude/project-state.md merge=union
 MIS_HANDOFF.md merge=union
+docs/notes/DECISIONS.md merge=union
+docs/notes/FACTS.md merge=union
+docs/notes/HISTORY.md merge=union
