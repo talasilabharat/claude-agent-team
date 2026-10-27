@@ -4,7 +4,7 @@ Legend: CONFIRMED = Bharat stated it. PROVEN = tested with real output. UNVERIFI
 
 ## 00. LIVE STATE - READ THIS FIRST (rewritten whenever anything changes)
 
-Last updated: 27 Oct 2026, evening, work laptop IXEDLAP00865, Claude Code (desktop app). Structure and rules: D:\Projects\workspace-control\rules\STATE_STANDARD.md. Update the matching block in the same turn as every decision, correction, proof, mistake or file change. CONFIRMED = Bharat stated it; PROVEN = tested. No secrets. Only "-" as a dash.
+Last updated: 27 Oct 2026, evening, work laptop L1, Claude Code (desktop app). Structure and rules: D:\Projects\workspace-control\rules\STATE_STANDARD.md. Update the matching block in the same turn as every decision, correction, proof, mistake or file change. CONFIRMED = Bharat stated it; PROVEN = tested. No secrets. Only "-" as a dash.
 
 ### A. What this project is
 - The "delivery-team" plugin: Bharat's Claude delivery agent team. 8 specialist subagents (architect, ux-cx-lead, frontend-dev, backend-dev, quality-reviewer, test-engineer, security-vapt, acceptance-lead) and 3 commands (/orchestrate = the master Delivery Director, /save, /version), plus a SessionStart hook that loads the working-style rules (context\working-style.md) and shows the folder's Git status. Names appear as delivery-team:<agent>.
