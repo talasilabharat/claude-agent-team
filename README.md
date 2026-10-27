@@ -35,7 +35,7 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 1. Edit the file in `agents/` or `skills/orchestrate/` in this repository.
 2. Bump `version` in `.claude-plugin/plugin.json` (always 1.3.x: 1.3.1 -> 1.3.2; 1.0.x is Timesheet Compliance and 1.2.x is the MIS, so never use those).
 3. Commit and push.
-4. On each laptop: `claude plugin update delivery-team`, then `/reload-plugins` (or start a new session).
+4. Nothing to do on the laptops: claude.ai follows this repository by itself (Customize > Plugins > Add > Manage marketplaces > claude-agent-team: "Sync automatically" is ON) and the new version reaches Chat, Cowork and Claude Code through the same account. To force it at once, press "Check for updates" in that same menu. A new version is only picked up when `version` in `plugin.json` changes.
 
 ## Release checklist (every new version)
 1. **Discuss** the change with Bharat until there is a conclusion. No edits yet.
@@ -46,4 +46,4 @@ claude plugin install delivery-team --marketplace talasilabharat/claude-agent-te
 5. **Test**: one token check (agent start cost) plus one small real task with an agent.
 6. **Second yes** from Bharat before pushing.
 7. **Push** to `talasilabharat/claude-agent-team` (secrets scan first; never force-push; repository stays private). Add one line to `CHANGELOG.md`.
-8. **Fresh zip for claude.ai** (forward-slash paths, `.claude-plugin/plugin.json` at the root, without `history/`), then Upload plugin in claude.ai.
+8. **No zip and no upload any more** (27 Oct 2026): claude.ai syncs this repository itself. Keep exactly ONE `plugin.json` in the repository (at `.claude-plugin/plugin.json`): a second one anywhere, such as an old copy in a `history/` folder, makes claude.ai refuse the whole sync ("plugin failed validation"). Old versions live in `history-archive.zip`. After pushing, open Manage marketplaces: it should say "Synced" with the new commit.
