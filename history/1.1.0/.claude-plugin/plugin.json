@@ -1,8 +1,0 @@
-{
-    "name":  "delivery-team",
-    "version":  "1.1.0",
-    "description":  "Bharat\u0027s delivery agent team: 8 specialist subagents (architect, ux-cx-lead, frontend-dev, backend-dev, quality-reviewer, test-engineer, security-vapt, acceptance-lead) plus the /orchestrate master skill.",
-    "author":  {
-                   "name":  "Bharat"
-               }
-}

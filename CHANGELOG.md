@@ -1,7 +1,7 @@
 # Changelog - delivery-team plugin
 
 Version family: 1.3.x is this plugin (1.0.x is Timesheet Compliance, 1.2.x is the MIS, so never use those).
-Old builds 1.0.0 - 1.3.0 were made before the renumbering; exact copies are kept in `history/<version>/` for reference only (they are not loaded by Claude).
+Old builds 1.0.0 - 1.3.0 were made before the renumbering; exact copies are kept in `history-archive.zip` (folder `history/<version>/` inside it) for reference only (they are not loaded by Claude). The archive is a zip because claude.ai refuses to sync a repository that holds more than one `plugin.json`.
 
 | Version | What changed | Why |
 |---|---|---|
