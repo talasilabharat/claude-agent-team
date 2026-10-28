@@ -1,6 +1,6 @@
 ---
 name: start
-description: The ONE skill for Bharat's whole workspace. Use when Bharat's message is just "Start" or "start" (alone, or with a greeting such as hello or good morning), or a session opens with no specific task. Do NOT use it when "start" is part of a specific task (for example "start the build"). Also use it when he wants a NEW project, repo or Git setup; asks how his workspace, sync, GitHub, GitLab, delivery agents, project notes or laptops (L1, L2, L3) work; reports something broken, out of sync or missing; or is on a NEW laptop or a NEW Claude account (it sets everything up, step by step, by itself). It greets him, checks everything and fixes what it can, shows the project list, and takes the path he picks: an existing project, a new project, how things work, or fix a problem. Works in Claude Code, Cowork and Chat (fully in Code and in Cowork linked to his computer; in Chat and unlinked Cowork it guides and hands over).
+description: The ONE skill for Bharat's whole workspace. Use when Bharat's message is just "Start" or "start" (alone, or with a greeting such as hello or good morning), or a session opens with no specific task. Do NOT use it when "start" is part of a specific task (for example "start the build"). Also use it when he wants a NEW project, repo or Git setup; asks how his workspace, sync, GitHub, GitLab, delivery agents, project notes or laptops (L1, L2, L3) work; reports something broken, out of sync or missing; or is on a NEW laptop or a NEW Claude account (it sets everything up, step by step, by itself). It greets him, checks everything and fixes what it can, shows the project list, and takes the path he picks: an existing project, a new project, how things work, or fix a problem. This is `delivery-team:start`: when Bharat says Start, use THIS skill, never another plugin's skill that is also called start (for example `productivity:start`, which sets up a task list). Works in Claude Code (fully), in Cowork with a folder connected (reads and writes files, cannot run commands) and in Chat or Cowork without a folder (guides and hands over).
 ---
 # Start
 
@@ -12,15 +12,16 @@ description: The ONE skill for Bharat's whole workspace. Use when Bharat's messa
 5. Laptops have labels, never real computer names: L1 = the i-exceed work laptop, L2 = his second laptop, L3 and up = new ones. The label is in a local file on each laptop. If this laptop has none, ASK which it is (never assume) and run `setup-laptop.ps1 -Label Lx`.
 6. Call the delivery agents only when Bharat says so. Never change an agent's persona or instructions without his explicit approval naming the agent and the change.
 7. Keep the project notes current IN THE SAME TURN as every decision, correction, proof, mistake or file change (block `## 00. LIVE STATE`).
+8. ONE yes, then no more questions. Before the first change, list in ONE message everything you will do (every step, install, browser step, the laptop label question, and what you will need from him), and ask a single clear YES. After it, do all the steps without asking again. Stop only for: his GitHub Authorize click or a sign-in, a secret, the app's own safety refusal, or a failure; say exactly what you need at that moment. Never ask him a question you can answer by checking.
 
-## Step 0: where are you running? (proven by testing on 27 Oct 2026, plugin 1.3.4)
+## Step 0: where are you running? (proven by testing on 27 and 28 Oct 2026)
 | Surface | This skill | Agents | His computer (files, commands) |
 |---|---|---|---|
 | Claude Code (desktop app) | works | works | yes: FULL mode |
-| Cowork linked to his computer ("Link to this computer" in the desktop app, not on claude.ai web) | not tested | not tested | Cowork says yes; NOT tested: try a command first |
-| Cowork not linked (web) | works | CALLABLE (proven: the architect agent really ran and answered) | NO, cloud workspace only |
+| Cowork with a folder connected (for example D:\Projects) | works (proven 28 Oct 2026) | not tested in this setup | files: read and write YES; commands: NO (proven: it looked for a way to run commands and found none) = FILES mode |
+| Cowork with no folder (web or cloud) | works | CALLABLE (proven: the architect agent really ran and answered) | NO, cloud workspace only |
 | Claude Chat | works | NOT callable (proven twice: no agent-starting tool exists) | NO, Anthropic's cloud sandbox only |
-- FULL mode = you can run a command on his computer. Test it: run `powershell -NoProfile -Command "Test-Path D:\"` (or the equivalent); if it works and the workspace folder exists, FULL. If the tool does not exist, LIGHT mode (see the end).
+- FULL mode = you can run a command on his computer. Test it: run `powershell -NoProfile -Command "Test-Path D:\"` (or the equivalent); if it works and the workspace folder exists, FULL. If the tool does not exist and a workspace folder is connected, FILES mode; if no folder is connected, LIGHT mode (both at the end).
 - FULL mode but no `workspace-control` folder found: this laptop or account is new: go to `reference/bootstrap.md` (Step 1 below shows when).
 
 ## Step 1: greet, check, fix (FULL mode)
@@ -47,8 +48,15 @@ Read `<workspace>\PROJECTS.md`. Show a numbered list (number, name, one line on 
 - **WRONG:** follow `reference/fix-issues.md`.
 - **New laptop or new Claude account:** `reference/bootstrap.md`. Sign-ins and tokens: `reference/credentials.md`.
 
-## LIGHT mode (Chat, Cowork not linked to his computer)
+## FILES mode (Cowork with a folder such as D:\Projects connected; no commands)
+- Say once: "I can read and write files in <folder> but I cannot run commands, so I cannot sync, run the health check, check sign-ins or set up a laptop here."
+- Read `<folder>\PROJECTS.md` and show the menu (Step 2) WITHOUT the "in step with GitHub" column.
+- For a project: read its notes (Step 3, point 3) and brief him (point 4); say the notes may be older than GitHub because nothing is synced from here.
+- You may write decisions into that project's notes file (block `## 00. LIVE STATE`) in the same turn. Do not edit other files or anything inside `.git` unless he asks. Tell him the next Code tab session uploads them to GitHub by itself.
+- For sync, checks, a new project, a new laptop or account, or WRONG: tell him in two lines to open the Code tab in the desktop app and say Start.
+
+## LIGHT mode (Chat, Cowork with no folder connected)
 - Say: "I cannot see your files here, so I cannot check sync or read your notes myself." Ask which project. With a GitHub connector read `workspace-control/PROJECTS.md` and the project's notes from GitHub; otherwise ask him to attach or paste the notes (`.claude/project-state.md`, or `MIS_HANDOFF.md` for MIS; block "00. LIVE STATE").
-- You cannot sync, install or check sign-ins here. If he wants a laptop or account set up: tell him in two lines to open the Claude desktop app (Code tab, or a Cowork task linked to his computer) and say "Start"; everything else happens there by itself.
+- You cannot sync, install or check sign-ins here. If he wants a laptop or account set up: tell him in two lines to open the Claude desktop app, go to the Code tab and say "Start"; everything else happens there by itself.
 - Nothing decided here may be lost: end with a short handoff note in the LIVE STATE style (decisions, proven facts, open items, next step) he can save into the project's notes (the `save` skill helps).
 - Ask him to type `/version` so you can tell whether his delivery-team plugin is current.
