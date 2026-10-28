@@ -1,6 +1,6 @@
 ---
 name: start
-description: The ONE skill for Bharat's whole workspace. Use when Bharat's message is just "Start" or "start" (alone, or with a greeting such as hello or good morning), or a session opens with no specific task. Do NOT use it when "start" is part of a specific task (for example "start the build"). Also use it when he wants a NEW project, repo or Git setup; asks how his workspace, sync, GitHub, GitLab, delivery agents, project notes or laptops (L1, L2, L3) work; reports something broken, out of sync or missing; or is on a NEW laptop or a NEW Claude account (it sets everything up, step by step, by itself). It greets him, checks everything and fixes what it can, shows the project list, and takes the path he picks: an existing project, a new project, how things work, or fix a problem. This is `delivery-team:start`: when Bharat says Start, use THIS skill, never another plugin's skill that is also called start (for example `productivity:start`, which sets up a task list). Works in Claude Code (fully), in Cowork with a folder connected (reads and writes files, cannot run commands) and in Chat or Cowork without a folder (guides and hands over).
+description: The ONE skill for Bharat's whole workspace. This is `delivery-team:start`: use it (never another plugin's start, such as `productivity:start`) when his message is just "Start" or "start" (alone, or with a greeting), or a session opens with no task. Not for "start" inside a task (for example "start the build"). Also use it for a NEW project, repo or Git setup; questions on how his workspace, sync, GitHub, GitLab, delivery agents, project notes or laptops (L1, L2, L3) work; anything broken, out of sync or missing; a NEW laptop or NEW Claude account (it sets everything up); or "Run the Cowork check". It greets him, checks and fixes what it can, shows the project list, and takes his path. Full in Claude Code; in Cowork with a folder it reads and writes files only; in Chat it guides.
 ---
 # Start
 
@@ -26,6 +26,8 @@ description: The ONE skill for Bharat's whole workspace. Use when Bharat's messa
 
 ## Step 1: greet, check, fix (FULL mode)
 - One warm line ("Hi Bharat, ready when you are.").
+- Folder permission, first: if the workspace folder (`D:\Projects`) is not already a working folder of this session, ask for it with the app's folder request (view, read, download, create, edit; Git there) in the same breath as the ONE yes (rule 8). Nothing outside it.
+- Work done outside Code: if the session-start message or the check says COWORK CHECK NEEDED or HELD, do `reference/cowork-intake.md` before the menu (also when he says "Run the Cowork check for <project>"). If it says PARALLEL work, tell him to finish it in Cowork and come back, and leave that project alone.
 - Check, do not assume, that the delivery-team plugin is in THIS Claude account and is the newest version (`reference/bootstrap.md` Account step, `reference/plugin-update.md`). A new laptop, a new account, or both: `reference/bootstrap.md` does everything after one yes.
 - No `workspace-control` folder: say "This looks like a new laptop or account. I will set everything up for you; it takes a few minutes. Shall I start?" On yes follow `reference/bootstrap.md`, then come back here.
 - Otherwise run `powershell -NoProfile -File <workspace>\scripts\start-check.ps1` (read-only; `<workspace>` is `D:\Projects` on L1).
@@ -46,15 +48,15 @@ Read `<workspace>\PROJECTS.md`. Show a numbered list (number, name, one line on 
 - **NEW:** follow `reference/new-project.md`.
 - **HOW:** answer from `reference/guide.md` (short, plain; open the section he needs).
 - **WRONG:** follow `reference/fix-issues.md`.
-- **New laptop or new Claude account:** `reference/bootstrap.md`. Sign-ins and tokens: `reference/credentials.md`.
+- **New laptop or new Claude account (or both):** `reference/bootstrap.md` (the ONE MESSAGE and the table of situations). Sign-ins and tokens: `reference/credentials.md`.
+- **"Run the Cowork check for <project>":** `reference/cowork-intake.md`.
 
-## FILES mode (Cowork with a folder such as D:\Projects connected; no commands)
-- Say once: "I can read and write files in <folder> but I cannot run commands, so I cannot sync, run the health check, check sign-ins or set up a laptop here."
-- Read `<folder>\PROJECTS.md` and show the menu (Step 2) WITHOUT the "in step with GitHub" column.
-- For a project: read its notes (Step 3, point 3) and brief him (point 4); say the notes may be older than GitHub because nothing is synced from here.
-- You may write decisions into that project's notes file (block `## 00. LIVE STATE`) in the same turn. Do not edit other files or anything inside `.git` unless he asks. Tell him the next Code tab session uploads them to GitHub by itself.
-- For sync, checks, a new project, a new laptop or account, or WRONG: tell him in two lines to open the Code tab in the desktop app and say Start.
-
+## FILES mode (Cowork with a folder connected; no commands)
+Read `reference/cowork-guide.md` NOW and follow it exactly. It holds the folder step, what you may and may never do, the editing marker, the inbox entry, the warning banner, and the numbered steps to give Bharat for everything that needs Claude Code (a NEW project, a new laptop or account, sync, tests, deploys). Short version:
+- First line of every Cowork Start: no folder connected yet? Ask him to connect `D:\Projects` (view, read, create, edit; no deleting, no Git) and wait. Then say once that you can read and write files but cannot run commands.
+- Read `<folder>\PROJECTS.md` and show the menu (Step 2) without the "in step with GitHub" column; brief a project from its notes (Step 3, points 3 and 4) and say the copy may be older than GitHub.
+- Before an edit: check `.code-active` (Code working there? then wait), keep the `.cowork-editing` marker. After it: log it in `docs\notes\COWORK-INBOX.md` as PENDING and UNTESTED, and end with the warning and the exact text to paste into Code. Never claim a change was tested, pushed or deployed.
+- Never: write inside `.git`, touch the workspace scripts, hooks or settings, delete or rename anything, create a project, put secrets in files, or quote the confidential MIS section.
 ## LIGHT mode (Chat, Cowork with no folder connected)
 - Say: "I cannot see your files here, so I cannot check sync or read your notes myself." Ask which project. With a GitHub connector read `workspace-control/PROJECTS.md` and the project's notes from GitHub; otherwise ask him to attach or paste the notes (`.claude/project-state.md`, or `MIS_HANDOFF.md` for MIS; block "00. LIVE STATE").
 - You cannot sync, install or check sign-ins here. If he wants a laptop or account set up: tell him in two lines to open the Claude desktop app, go to the Code tab and say "Start"; everything else happens there by itself.

@@ -1,0 +1,21 @@
+# Cowork check (Claude Code side): verify work done outside Code, then save it
+
+When: the session-start hook says "COWORK CHECK NEEDED", or Bharat says "Run the Cowork check for <project>", or `start-check.ps1` shows a project HELD. Cowork can read and write files but cannot run git, tests or the deploy, so its edits are HELD (not saved, not uploaded, not deployed) until you have checked them. Bharat asked on 28 Oct 2026 that a delivery agent does this check automatically; no agent persona or instruction is changed by it. Rules of `SKILL.md` apply.
+
+## Per project (one after the other)
+0. **Parallel work first.** If the hook or `scripts\cowork-scan.ps1` says PARALLEL (Cowork edited it less than 5 minutes ago), stop for that project: tell Bharat in one plain line "Parallel work is happening in <project>: finish it in Cowork and come back." Do not edit, save, push or deploy it. Carry on with the other projects. Look again with `cowork-scan.ps1` when he says he is done.
+1. **Look.** In the project folder: `git status --short`, `git diff --stat`, then the diff (sample big ones). Read `docs\notes\COWORK-INBOX.md` (entries with `Status: PENDING`) and the project's `CLAUDE.md`. Fetch GitHub (`git fetch origin main`) and see whether it is ahead on the same files. If yes, nothing is overwritten: the normal sync (rebase) runs after the check and raises an ALERT on a real conflict, the usual way.
+2. **Compare claim and reality.** Files changed but not logged, logged but not changed, deletions, renames, files over 5 MB, binary files, anything under `.git`, `workspace-control\scripts`, hooks or settings (Cowork must never touch these), whole-file changes that only differ by line endings. Never delete or revert anything without asking Bharat; ask in one line.
+3. **Review by the delivery agent.** Call `delivery-team:quality-reviewer` (read only) with: the project, the diff, the inbox entry, the project's `CLAUDE.md` rules. Ask it for proven problems only: correctness, long dashes (only "-" is allowed), secrets, the confidential MIS section quoted, version numbers that do not agree (manifest, notes, changelog), line-ending noise, files the inbox does not mention.
+4. **Run the project's own checks** (what its `CLAUDE.md` says: for the extension projects syntax checks of the changed JavaScript and a JSON parse of the manifest; the MIS deploy rules: MD5 of every copied file, Reload never Remove). If a check cannot run here, say so; do not claim it passed.
+5. **Fix** what the agent and the checks proved, small and plain. Anything larger: tell Bharat and leave the entry PENDING.
+6. **Notes and version.** Update the project's notes (`## 00. LIVE STATE`): what Cowork changed, what was PROVEN by the checks (Cowork's claims stay "claimed" until proven). Set the version only as the project's rules say.
+7. **Close the entries.** In `docs\notes\COWORK-INBOX.md` change each checked entry to `Status: VERIFIED` and add `Verified by: Code <date>, <laptop label>; reviewer findings <n>, fixed <n>; checks run: <list>`. Add any unlogged files to the entry. Never delete an entry.
+8. **Release and save.** Run `<workspace>\workspace-control\scripts\sync-all.ps1 -Release <project>` (removes the hold), then `sync-all.ps1 -Only <project>` (secret scan, commit, download newer work, upload; for MIS the project's own sync also deploys: tell Bharat to Reload the extension once).
+9. **Report in at most 6 plain lines:** per project what Cowork had changed, what the check found and fixed, what is saved and uploaded, anything still open.
+
+## If something stops it
+- The reviewer or a check finds a blocker you cannot fix at once: leave `Status: PENDING`, tell Bharat what and why, keep the hold. Nothing is lost: the files stay on disk.
+- A secret in the changes: nothing is uploaded; say which file, remove it only after Bharat agrees.
+- A merge conflict ALERT after release: follow `reference/fix-issues.md` (never force, never discard the other laptop's work).
+- Bharat does not want the check now: leave everything as it is; the hold stays and the hook reminds him at the next start.
